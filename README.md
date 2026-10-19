@@ -1,8 +1,51 @@
-# search_engine
+<div align="center">
+
+<img src="./docs/images/readme/banner.svg" alt="Boost Search Engine：从一行关键词，走进文档的上下文。" width="100%" />
+
+<h1>Boost Search Engine</h1>
+
+<p><b>从一行关键词，走进文档的上下文。</b></p>
+
+<p><img src="https://img.shields.io/badge/C%2B%2B-11-00599C?style=flat-square" alt="C++ 11" /> <img src="https://img.shields.io/badge/cppjieba-中文分词-7E9CC4?style=flat-square" alt="cppjieba 中文分词" /> <img src="https://img.shields.io/badge/Index-Inverted-B77699?style=flat-square" alt="Index Inverted" /></p>
+
+<p><a href="#功能速览">功能速览</a> · <a href="#工作流程">工作流程</a> · <a href="#快速开始">快速开始</a> · <a href="#当前边界">当前边界</a> · <a href="./README.en.md">English</a></p>
+
+</div>
+
+---
 
 一个基于 **C++11、cppjieba 和倒排索引** 实现的 Boost 文档站内搜索项目。项目将本地 HTML 文档转换为可检索语料，在服务启动时建立内存索引，并通过 HTTP 接口和网页提供关键词搜索。
 
 适合用来学习 HTML 内容提取、中文分词、正排与倒排索引、搜索结果排序，以及 C++ 后端与网页之间的数据交互。
+
+## 页面预览
+
+<img src="./docs/images/readme/search-page.png" alt="仓库现有搜索页面的初始界面：关键词输入框与搜索按钮" width="100%" />
+
+<p align="center"><sub>现有页面的初始界面实拍；检索结果需要在 Linux 上启动 C++ HTTP 服务后生成。</sub></p>
+
+## 功能速览
+
+<table>
+  <tr>
+    <td width="33%" valign="top"><b>01 / 整理文档</b><br /><br />扫描本地 HTML，提取标题和正文，生成对应的 Boost 文档链接。</td>
+    <td width="33%" valign="top"><b>02 / 建立索引</b><br /><br />使用 cppjieba 搜索模式分词，在内存中构建正排与倒排索引。</td>
+    <td width="33%" valign="top"><b>03 / 返回答案入口</b><br /><br />合并命中文档、按权重排序，返回标题、摘要与原文链接。</td>
+  </tr>
+</table>
+
+```mermaid
+flowchart LR
+    H[本地 HTML 文档] --> P[parser 提取 / 清洗]
+    P --> T[raw.txt 语料]
+    T --> I[启动时建立内存索引]
+    Q[关键词查询] --> S[分词 / 召回 / 排序]
+    I --> S
+    S --> O[标题 + 摘要 + 原文链接]
+    O --> W[HTTP / 网页 / CLI]
+```
+
+> 这是面向 Boost 文档的站内搜索学习项目。索引在服务启动时构建于内存中，尚未提供持久化、增量更新或分页；运行环境为 Linux。
 
 ## 功能概览
 
@@ -102,7 +145,7 @@ Ubuntu 的 cpp-httplib 开发包位于 universe 仓库；具体可用版本参�
 ### 1. 获取代码
 
 ```bash
-git clone https://gitee.com/a2186988646/search_engine.git
+git clone https://github.com/HandlerOne01/search_engine.git
 cd search_engine
 ```
 
@@ -290,3 +333,14 @@ weight = 标题词频 × 10 + 正文词频 × 1
 ## 许可证
 
 当前仓库根目录未提供项目 LICENSE 文件。第三方库与 Boost 文档的使用和分发应遵循各自的授权条款。
+
+## 相关项目
+
+| 项目 | 这里负责什么 |
+| --- | --- |
+| [IMiss Blog](https://github.com/HandlerOne01/IMiss_Blog) | Astro + Svelte 个人技术博客，提供文章阅读与 AI 桌宠入口。 |
+| [Agent for Blog](https://github.com/HandlerOne01/agent_-for_-blog) | LangGraph 博客助手，负责文章推荐、正文介绍与阅读偏好。 |
+| [Boost Search Engine](https://github.com/HandlerOne01/search_engine) | C++ 文档搜索实践，学习分词、索引与结果排序。 |
+| [Reactor Server](https://github.com/HandlerOne01/my_server) | C++ Linux 网络编程实践，学习连接、事件循环与 HTTP。 |
+
+<p align="center"><sub>记录学习，也把每一次实践留成可以回看的路。</sub></p>
