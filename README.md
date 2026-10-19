@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="./docs/images/readme/banner.svg" alt="Boost Search Engine：从一行关键词，走进文档的上下文。" width="100%" />
+
 
 <h1>Boost Search Engine</h1>
 
